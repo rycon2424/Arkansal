@@ -67,11 +67,9 @@ public class CameraMovement : MonoBehaviour {
 
 		if (Physics.Raycast(myRay, out hit)) {
 			if (hit.collider.gameObject.GetComponent<PlayerScript> () == null) {
-				Debug.Log ("blocked");
 				transform.position = Vector3.MoveTowards (transform.position, focusPoint.transform.position, camCorrectionSpeed);
 				StartCoroutine (CamCorrectionDelay());
 			} else {
-				Debug.Log("not blocked");
 				if (canReturnCam == true) {
 					transform.position = Vector3.MoveTowards (transform.position, recoveryPoint.transform.position, camCorrectionSpeed);
 				}
