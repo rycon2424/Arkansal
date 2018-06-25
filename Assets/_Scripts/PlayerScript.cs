@@ -32,7 +32,10 @@ public class PlayerScript : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                speed = 8f;
+                if (!Input.GetKey(KeyCode.S))
+                {
+                    speed = 8f;
+                }
             }
 
             else
@@ -45,12 +48,19 @@ public class PlayerScript : MonoBehaviour {
         {
             speed = 2;
         }
-
+        
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                sideways = 6f;
+                if (!Input.GetKey(KeyCode.S))
+                {
+                    sideways = 6f;
+                }
+                else
+                {
+                    sideways = 2;
+                }
             }
             else
             {
