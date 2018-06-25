@@ -76,7 +76,35 @@ public class PlayerScript : MonoBehaviour {
     {
         if (Input.GetMouseButton(0))
         {
-            anim.SetInteger("State", 6);
+            anim.SetBool("Firing", true);
+            if (Input.GetKey(KeyCode.A))
+            {
+                anim.SetBool("WalkFiring", false);
+                anim.SetBool("Firing", true);
+                anim.SetInteger("State", 3);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                anim.SetBool("WalkFiring", false);
+                anim.SetBool("Firing", true);
+                anim.SetInteger("State", 4);
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                anim.SetBool("WalkFiring", true);
+                anim.SetBool("Firing", false);
+            }
+            else
+            {
+                anim.SetBool("WalkFiring", false);
+                anim.SetInteger("State", 9);
+            }
+
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            anim.SetBool("Firing", false);
+            anim.SetBool("WalkFiring", false);
         }
     }
 
@@ -124,8 +152,7 @@ public class PlayerScript : MonoBehaviour {
             anim.SetInteger("State", 5);
         }
 
-        if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.W) ||
-            Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftShift))
+        if (!Input.anyKey)
         {
             anim.SetInteger("State", 0);
         }
