@@ -28,10 +28,14 @@ public class PlayerScript : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.W))
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-
+                speed = 2 * 1.5f;
             }
+        }
+        else
+        {
+            speed = 2;
         }
 
         transform.Translate(Vector3.forward * translation);

@@ -264,8 +264,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  speed: 40
-  rotationSpeed: 50
+  speed: 2
+  sideways: 1
   anim: {fileID: 0}
 --- !u!136 &1464996677
 CapsuleCollider:
