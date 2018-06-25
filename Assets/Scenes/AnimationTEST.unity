@@ -240,12 +240,12 @@ Prefab:
     - target: {fileID: 114266060381550110, guid: dd540967cf8b94f4bb922a7f074a18a4,
         type: 2}
       propertyPath: speed
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114266060381550110, guid: dd540967cf8b94f4bb922a7f074a18a4,
         type: 2}
       propertyPath: sideways
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd540967cf8b94f4bb922a7f074a18a4, type: 2}
