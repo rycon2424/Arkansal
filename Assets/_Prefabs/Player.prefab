@@ -720,6 +720,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1596127433292210
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4160167679881614}
+  - component: {fileID: 114970894762372064}
+  m_Layer: 0
+  m_Name: RecoveryPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1620743963222104
 GameObject:
   m_ObjectHideFlags: 1
@@ -1141,6 +1157,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4160167679881614}
   - {fileID: 4339764170085344}
   m_Father: {fileID: 4940006909053690}
   m_RootOrder: 0
@@ -1211,6 +1228,19 @@ Transform:
   m_Children:
   - {fileID: 4424637897754876}
   m_Father: {fileID: 4515048373050654}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4160167679881614
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596127433292210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4018758038530298}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4164688141633232
@@ -1386,7 +1416,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457439550232062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.05, y: -0.192, z: 2.65}
+  m_LocalPosition: {x: -2.05, y: 0.028, z: 2.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4056209665115100}
@@ -1407,7 +1437,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4018758038530298}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4344358403403850
 Transform:
@@ -2228,6 +2258,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 5
   smoothing: 0.5
+  yMinClamp: 60
+  yMaxClamp: 60
+  camCorrectionSpeed: 0.1
 --- !u!114 &114115956877459810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2254,6 +2287,17 @@ MonoBehaviour:
   speed: 2
   sideways: 1
   anim: {fileID: 0}
+--- !u!114 &114970894762372064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596127433292210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee14e55cbeb0de42bf89c27f3ac0aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &124084534623450716
 Behaviour:
   m_ObjectHideFlags: 1
