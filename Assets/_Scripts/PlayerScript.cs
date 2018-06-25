@@ -19,6 +19,8 @@ public class PlayerScript : MonoBehaviour {
 	void Update ()
     {
         Movement();
+        Shooting();
+        Animation();
 	}
 
     void Movement()
@@ -30,16 +32,94 @@ public class PlayerScript : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                speed = 2 * 1.5f;
+                speed = 8f;
+            }
+
+            else
+            {
+                speed = 2;
             }
         }
-        else
+
+        if (Input.GetKey(KeyCode.S))
         {
             speed = 2;
         }
 
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                sideways = 6f;
+            }
+            else
+            {
+                sideways = 2;
+            }
+        }
+
         transform.Translate(Vector3.forward * translation);
         transform.Translate(Vector3.right * rotation);
+    }
+
+    void Shooting()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            anim.SetInteger("State", 6);
+        }
+    }
+
+    void Animation()
+    {
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                anim.SetInteger("State", 2);
+            }
+            else
+            {
+                anim.SetInteger("State", 1);
+            }
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                anim.SetInteger("State", 7);
+            }
+            else
+            {
+                anim.SetInteger("State", 3);
+            }
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                anim.SetInteger("State", 8);
+            }
+            else
+            {
+                anim.SetInteger("State", 4);
+            }
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            anim.SetInteger("State", 5);
+        }
+
+        if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.W) ||
+            Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            anim.SetInteger("State", 0);
+        }
+
     }
 
 }
