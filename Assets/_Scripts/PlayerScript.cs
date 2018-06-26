@@ -9,6 +9,9 @@ public class PlayerScript : MonoBehaviour {
     public float speed;
     public float sideways;
     public Animator anim;
+
+    public bool sprinting;
+    
     
 	void Start ()
     {
@@ -21,12 +24,22 @@ public class PlayerScript : MonoBehaviour {
         Movement();
         Shooting();
         Animation();
-	}
+        Sliding();
+    }
 
     void Movement()
     {
         float translation = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         float rotation = Input.GetAxis("Horizontal") * sideways * Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            sprinting = true;
+        }
+        else
+        {
+            sprinting = false;
+        }
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -37,7 +50,6 @@ public class PlayerScript : MonoBehaviour {
                     speed = 8f;
                 }
             }
-
             else
             {
                 speed = 2;
@@ -74,38 +86,54 @@ public class PlayerScript : MonoBehaviour {
 
     void Shooting()
     {
-        if (Input.GetMouseButton(0))
+        if (!sprinting)
         {
-            anim.SetBool("Firing", true);
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetMouseButton(0))
             {
-                anim.SetBool("WalkFiring", false);
                 anim.SetBool("Firing", true);
-                anim.SetInteger("State", 3);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                anim.SetBool("WalkFiring", false);
-                anim.SetBool("Firing", true);
-                anim.SetInteger("State", 4);
-            }
-            if (Input.GetKey(KeyCode.W))
-            {
-                anim.SetBool("WalkFiring", true);
-                anim.SetBool("Firing", false);
-            }
-            else
-            {
-                anim.SetBool("WalkFiring", false);
-                anim.SetInteger("State", 9);
-            }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    anim.SetBool("WalkFiring", false);
+                    anim.SetBool("Firing", true);
+                    anim.SetInteger("State", 3);
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    anim.SetBool("WalkFiring", false);
+                    anim.SetBool("Firing", true);
+                    anim.SetInteger("State", 4);
+                }
+                if (Input.GetKey(KeyCode.W))
+                {
+                    anim.SetBool("WalkFiring", true);
+                    anim.SetBool("Firing", false);
+                }
+                else
+                {
+                    anim.SetBool("WalkFiring", false);
+                    anim.SetInteger("State", 9);
+                }
 
+            }
         }
         if (Input.GetMouseButtonUp(0))
         {
             anim.SetBool("Firing", false);
             anim.SetBool("WalkFiring", false);
         }
+    }
+
+    void Sliding()
+    {
+
+        if (sprinting)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                anim.SetInteger("State", 11);
+            }
+        }
+
     }
 
     void Animation()
