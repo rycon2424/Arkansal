@@ -6,14 +6,25 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour {
 
     public Rigidbody rb;
+    public Animator anim;
+    public CapsuleCollider slideBoxCollider;
+
+    [Header("MovementFloats")]
     public float speed;
     public float sideways;
-    public Animator anim;
+    public float reloadWalkSpeed;
 
+    [Header("PlayerStates")]
     public bool sprinting;
-    
-    
-	void Start ()
+    public bool reloading = false;
+
+    [Header("Weapon")]
+    public GameObject muzzleFlash;
+    public Transform ammoClip;
+    public GameObject playerHand;
+
+
+    void Start ()
     {
         rb = this.GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -21,6 +32,7 @@ public class PlayerScript : MonoBehaviour {
 	
 	void Update ()
     {
+        Reload();
         Movement();
         Shooting();
         Animation();
@@ -86,10 +98,9 @@ public class PlayerScript : MonoBehaviour {
 
     void Shooting()
     {
-        if (!sprinting)
-        {
-            if (Input.GetMouseButton(0))
-            {
+        if (Input.GetMouseButton(0) && !sprinting && !reloading)
+          {
+            muzzleFlash.SetActive(true);
                 anim.SetBool("Firing", true);
                 if (Input.GetKey(KeyCode.A))
                 {
@@ -114,13 +125,41 @@ public class PlayerScript : MonoBehaviour {
                     anim.SetInteger("State", 9);
                 }
 
-            }
+          }
+        else
+        {
+            muzzleFlash.SetActive(false);
         }
+        
         if (Input.GetMouseButtonUp(0))
         {
             anim.SetBool("Firing", false);
             anim.SetBool("WalkFiring", false);
         }
+    }
+
+    void Reload()
+    {
+        if (reloading)
+        {
+            speed = reloadWalkSpeed;
+            sideways = reloadWalkSpeed;
+            anim.SetBool("Reload", true);
+        }
+        if (Input.GetKeyDown(KeyCode.R) && !reloading && !sprinting)
+        {
+            reloading = true;
+            StartCoroutine(ReloadTime());
+        }
+    }
+
+    IEnumerator ReloadTime()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(ammoClip, playerHand.transform.position, playerHand.transform.rotation);
+        yield return new WaitForSeconds(1.7f);
+        reloading = false;
+        anim.SetBool("Reload", false);
     }
 
     void Sliding()
@@ -130,10 +169,18 @@ public class PlayerScript : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                StartCoroutine(SlideHitbox());
+                slideBoxCollider.enabled = false;
                 anim.SetInteger("State", 11);
             }
         }
 
+    }
+
+    IEnumerator SlideHitbox()
+    {
+        yield return new WaitForSeconds(1.4f);
+        slideBoxCollider.enabled = true;
     }
 
     void Animation()
@@ -180,7 +227,8 @@ public class PlayerScript : MonoBehaviour {
             anim.SetInteger("State", 5);
         }
 
-        if (!Input.anyKey)
+        if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W)
+            && !Input.GetKey(KeyCode.D) && !Input.GetMouseButton(0))
         {
             anim.SetInteger("State", 0);
         }
