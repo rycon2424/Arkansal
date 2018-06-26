@@ -167,11 +167,13 @@ public class PlayerScript : MonoBehaviour {
 
         if (sprinting)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
             {
-                StartCoroutine(SlideHitbox());
-                slideBoxCollider.enabled = false;
-                anim.SetInteger("State", 11);
+                if (Input.GetKey(KeyCode.E))
+                {
+                    StartCoroutine(SlideHitbox());
+                    anim.SetInteger("State", 11);
+                }
             }
         }
 
@@ -179,7 +181,11 @@ public class PlayerScript : MonoBehaviour {
 
     IEnumerator SlideHitbox()
     {
-        yield return new WaitForSeconds(1.4f);
+        anim.SetBool("Slide", true);
+        yield return new WaitForSeconds(0.4f);
+        slideBoxCollider.enabled = false;
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("Slide", false);
         slideBoxCollider.enabled = true;
     }
 
