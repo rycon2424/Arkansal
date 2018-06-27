@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23548692161332166}
   - component: {fileID: 54017958191399604}
   - component: {fileID: 65740847459017298}
+  - component: {fileID: 114295663391115702}
   m_Layer: 0
   m_Name: DroppedMag
   m_TagString: Untagged
@@ -112,3 +113,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.7961693, y: 13.821585, z: 8.344979}
   m_Center: {x: 0.000061897765, y: 9.195384, z: 10.553615}
+--- !u!114 &114295663391115702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1352069584195960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc673b8616d30b442a156660630278ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 30
